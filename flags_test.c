@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+int ft_printf(const char*, ...);
+
 int main()
 {
-    int r = 10;
+    int r = 2541;
     int k = 23;
     char *str = "heo";
     // %[flags][width][.precision][length] specifier
@@ -12,7 +14,8 @@ int main()
         width : number | *
         precision : .number | .*
     */
-    printf("%d\n", r);
+    
+    printf("%-10.5d\n", r);
     printf("%-.3d\n", r); // Left-justify flags = -
     printf("%.3d\n", r);
 

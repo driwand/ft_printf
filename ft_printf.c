@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abkssiba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/11/25 20:03:54 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/11/29 20:19:55 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/libft.h"
 #include <stdarg.h>
 #include <stdlib.h>
+#include "ft_printf.h"
 
 int count_bytes(const char *str, char parser)
 {
@@ -40,7 +41,7 @@ int count_bytes(const char *str, char parser)
     return (count);
 }
 
-int ft_print_string(const char *str)
+int ft_print_string(const char *str, ...)
 {
     va_list arg;
     int i;
@@ -80,39 +81,89 @@ int ft_print_string(const char *str)
     return (count - r);
 }
 
-int check_conversion(char c)
+int is_specifier(char c)
 {
-    if (c == '%' || c == 'c' || c == 's' || c == 'd')
+    if (c == 'c' || c == 's')
+        return (1);
+    if (c == 'p' || c == 'd' || c == 'i' || c == 'u'
+        || c == 'x' || c == 'X')
         return (1);
     return (0);
+}
+
+void inisilize_flags(t_flags *flg)
+{
+    flg->minus = 0;
+    flg->zero = 0;
+    flg->width = 0;
+    flg->precision = 0;
+    flg->specifier = 0;
+    flg->asterisk_precision = 0;
+    flg->asterisk_width = 0;
+}
+
+void get_flags(const char *str, t_flags *flg) 
+{
+    int i;
+    flg->width = 0;
+    
+    i = 0;
+    inisilize_flags(flg);
+    while (!is_specifier(str[i]))
+    {
+        if (str[i] == '-')
+            flg->minus = 1;
+        else if (str[i] == '0')
+            flg->zero = 1;
+        else if (str[i] == '.')
+        {
+            if (str[i - 1] == '*')
+                flg->asterisk_width = 1;
+            if (str[i + 1] == '*')
+                flg->asterisk_precision = 1;
+            flg->precision = ft_atoi(str + i + 1); // if the presicion is negetive then .. 
+            i++;
+        }
+        else if (flg->width == 0)
+            flg->width = ft_atoi(str + i);
+        i++;
+    }
+    if (is_specifier(str[i]))
+        flg->specifier = str[i];
+    if (flg->specifier == 'd' || flg->specifier == 'i' || flg->specifier == 'u'
+        || flg->specifier == 'x' || flg->specifier == 'x' || flg->specifier == 's')
+        flg->zero = 0;
 }
 
 int ft_printf(const char *str, ...)
 {
     int count;
     va_list arg;
+    t_flags flgs;
     int start;
     int i;
-
+    
     i = 0;
     va_start(arg, str);
     while (str[i])
     {
-        start = i;
-        while (str[i] != '%')
-        {
+        if (str[i] != '%')
             ft_putchar_fd(str[i], 1);
-        } 
-        if (str[i] == '%')
+        else
         {
-            count = ft_print_str(str, start, i);
-            check_conversion(str[i + 1]);
+            get_flags(str + i + 1, &flgs);
+            
+            //dont forget set flags to default
+            break;
         }
+        i++;
     }
+    printf("\nspecifier = %c, minus=%d zero=%d width=%d presicion=%d\n",flgs.specifier, flgs.minus, flgs.zero,flgs.width, flgs.precision);
+    return (0);
 }
 
 int main()
 {
-	printf("%d\n",ft_printf("hello %s %d world","mom","amal","dad"));
+	printf("%d\n",ft_printf("hello %-22.15s %d world","mom","amal","dad"));
     //printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
 }
