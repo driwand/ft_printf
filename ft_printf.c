@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/11/29 20:19:55 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/11/30 12:50:32 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int ft_print_string(const char *str, ...)
         while (str[i] == '%')
         {
             if (str[i + 1] == 's')
-            {
-                tmp = va_arg(arg, char*);
+            {    tmp = va_arg(arg, char*);
                 count += ft_strlen(tmp);
                 ft_putstr_fd(tmp, 1);
+
             }
             else if (str[i + 1] == '%')
                 ft_putchar_fd('%', 1);
@@ -77,7 +77,7 @@ int ft_print_string(const char *str, ...)
         if(str[i])
             i++;
     }
-    va_end(arg);
+
     return (count - r);
 }
 
@@ -105,8 +105,8 @@ void inisilize_flags(t_flags *flg)
 void get_flags(const char *str, t_flags *flg) 
 {
     int i;
+
     flg->width = 0;
-    
     i = 0;
     inisilize_flags(flg);
     while (!is_specifier(str[i]))
@@ -135,6 +135,72 @@ void get_flags(const char *str, t_flags *flg)
         flg->zero = 0;
 }
 
+int apply_minus()
+{
+    int count;
+
+    count = 0;
+    return (count);
+}
+
+int apply_width(int width, int len)
+{
+    int count;
+
+    count = 0;
+    while (count < width - len)
+    {
+        ft_putchar_fd(' ', 1);
+        count++;
+    }
+    return (count);
+}
+
+int print_string(const char *str, va_list *arg, t_flags flg)
+{
+    int count;
+    int i;
+    char *tmp;
+    int len;
+    int j;
+
+    j = -1;
+    i = 0;
+    count = 0;
+    tmp = va_arg(*arg, char*);
+    len = ft_strlen(tmp);
+    while (str[i] != flg.specifier)
+    {
+        if (flg.minus == 0)
+            count += apply_width(flg.width, len);
+        i++;
+    }
+    if (str[i] == 's' && i > 0)
+        ft_putstr_fd(tmp, 1);
+    if (i == 0)
+        ft_putstr_fd(tmp, 1);
+    return (count);
+}
+
+int printf_result(const char *str, va_list *arg, t_flags flg)
+{
+    if (flg.specifier == 's')
+    {
+        print_string(str, arg, flg);
+    }
+    return (0);
+}
+
+int len_flags(const char *str, char c)
+{
+    int i;
+
+    i = 0;
+    while (str[i] != c)
+        i++;
+    return (i);
+}
+
 int ft_printf(const char *str, ...)
 {
     int count;
@@ -152,18 +218,19 @@ int ft_printf(const char *str, ...)
         else
         {
             get_flags(str + i + 1, &flgs);
-            
-            //dont forget set flags to default
-            break;
+            printf_result(str + i + 1, &arg, flgs);
+            //printf("\nspecifier = %c, minus=%d zero=%d width=%d presicion=%d\n",flgs.specifier, flgs.minus, flgs.zero,flgs.width, flgs.precision);
+            i += len_flags(str + i, flgs.specifier);
+            inisilize_flags(&flgs);
         }
-        i++;
+        if (str[i])
+            i++;
     }
-    printf("\nspecifier = %c, minus=%d zero=%d width=%d presicion=%d\n",flgs.specifier, flgs.minus, flgs.zero,flgs.width, flgs.precision);
     return (0);
 }
 
 int main()
 {
-	printf("%d\n",ft_printf("hello %-22.15s %d world","mom","amal","dad"));
+	printf("%d\n",ft_printf("he%3s%s\n","ll", "o"));
     //printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
 }

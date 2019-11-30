@@ -15,7 +15,8 @@ int main()
         precision : .number | .*
     */
     
-    printf("%-10.5d\n", r);
+    printf("%.*d\n",-9, r);
+    printf("%-4s\n", str);
     printf("%-.3d\n", r); // Left-justify flags = -
     printf("%.3d\n", r);
 
