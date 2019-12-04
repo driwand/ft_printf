@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "utils.c"
 
 int ft_printf(const char*, ...);
 
@@ -7,21 +8,19 @@ int main()
 {
     int r = 2541;
     int k = 23;
-    char *str = "heo";
+    char *s = "hr";
+    char c = 'q';
     // %[flags][width][.precision][length] specifier
     /*
         flags : - | 0
         width : number | *
         precision : .number | .*
     */
-    
-    printf("%.*d\n",-9, r);
-    printf("%-4s\n", str);
-    printf("%-.3d\n", r); // Left-justify flags = -
-    printf("%.3d\n", r);
+    int *p;
+    p = &k;
+    char *adr = (char *)&r;
 
-    printf("%0d\n", r); // Left-pads the number with zeroes (0) instead of spaces
-    printf("%.d\n", r);
-    printf("%d\n", r);
+    printf("%-.26s\n", "hello");
+
     return (0);
 }
