@@ -6,12 +6,14 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/04 14:44:30 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/05 16:19:13 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "ft_printf.h"
+
+char *g_tmp;
 
 int count_bytes(const char *str, char parser)
 {
@@ -59,16 +61,18 @@ int apply_width(int width, int len)
 	return (count);
 }
 
-int apply_precision(char *str)
+int apply_precision(char *str, int pres)
 {
 	int count;
 
 	count = 0;
-	while (str[count])
-	{
-		ft_putchar(str[count]);
+	while (count < pres && str[count])
 		count++;
-	}
+	g_tmp = malloc(count + 1);
+	pres = -1;
+	while (++pres < count)
+		g_tmp[pres] = str[pres];
+	g_tmp[pres] = '\0';
 	return (count);
 }
 
@@ -81,19 +85,28 @@ int print_string(const char *str, va_list *arg, t_flags flg)
 
 	i = 0;
 	count = 0;
-	tmp = va_arg(*arg, char*);
+	
+	if (flg.precision != -1)
+	{
+		apply_precision(va_arg(*arg, char*), flg.precision);
+		tmp = g_tmp;
+	}
+	else
+		tmp = va_arg(*arg, char*);
 	len = ft_strlen(tmp);
     if (str[i] != flg.specifier)
     {
         if (flg.minus == 0)
-            count += apply_width(flg.width, len);
+		{
+			count += apply_width(flg.width, len);
+			if (flg.precision != -1)
+				count += ft_putstr(tmp);
+		}
 		else
 		{
 			count += ft_putstr(tmp);
 			count += apply_width(flg.width, len);
 		}
-		if (flg.precision)
-			return (apply_precision(tmp));
         i++;
     }
 	if ((str[i] == 's' && i > 0 && !flg.minus) || (i == 0))
@@ -140,6 +153,6 @@ int ft_printf(const char *str, ...)
 
 int main()
 {
-	ft_printf("%-.1s\n", "he");
+	printf("%d\n", ft_printf("%.s\n", "h"));
 	//printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
 }

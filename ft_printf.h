@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:08 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/04 13:46:20 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/05 15:04:43 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void			manage_flage(t_flags *flg, char c);
 void			get_flags(const char *str, t_flags *flg);
 int				ft_putstr(char *str);
 int				ft_putchar(char c);
+int				skip_digits(const char *str);
 #endif

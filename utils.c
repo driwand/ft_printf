@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:42:37 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/04 13:02:34 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/05 15:04:32 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,46 +31,14 @@ int ft_putstr(char *str)
     return (i);
 }
 
-int ft_isblank(char c)
+int skip_digits(const char *str)
 {
-	if (c <= 32)
-		return (1);
-	return (0);
+    int i;
+
+    i = 0;
+    while (ft_isdigit(str[i]))
+        i++;
+    return (i);
 }
 
-int		isvalid(char c, int base)
-{
-	char digits[17] = "0123456789abcdef";
-	char digits2[17] = "0123456789ABCDEF";
 
-	while (base--)
-		if (digits[base] == c || digits2[base] == c)
-			return (1);
-	return (0);
-}
-
-int		value_of(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f')
-		return (c - 'a' + 10);
-	else if (c >= 'A' && c <= 'F')
-		return (c - 'A' + 10);
-	return (0);
-}
-
-int		ft_atoi_base(const char *str, int str_base)
-{
-	int result;
-	int sign;
-
-	result = 0;
-	while (ft_isblank(*str))
-		str++;
-	sign = (*str == '-') ? -1 : 1;
-	(*str == '-' || *str == '+') ? ++str : 0;
-	while (isvalid(*str, str_base))
-		result = result * str_base + value_of(*str++);
-	return (result * sign);
-}
