@@ -20,12 +20,7 @@ int main()
     p = &k;
     char *adr = (char *)&r;
 
-    ft_printf("%p\n", &p);
-    printf("%p\n", &p);
+    //ft_printf("%p\n", &p);
+    printf("%*c\n",2, 'c');
     return (0);
-}
-
-char ft_itoa_base(int str, int base)
-{
-    
 }

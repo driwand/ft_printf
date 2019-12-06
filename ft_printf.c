@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/05 16:19:13 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/06 19:36:20 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +139,12 @@ int ft_printf(const char *str, ...)
 			count += ft_putchar(str[i]);
 		else
 		{
-			get_flags(str + i + 1, &flgs);
-			count += printf_result(str + i + 1, &arg, flgs);
-			//printf("\nspecifier = %c, minus=%d zero=%d width=%d presicion=%d\n",flgs.specifier, flgs.minus, flgs.zero,flgs.width, flgs.precision);
-			i += len_flags(str + i, flgs.specifier);
 			inisilize_flags(&flgs);
+			get_flags(str + i, &arg, &flgs);
+			count += printf_result(str + i + 1, &arg, flgs);
+			//printf("\nspecifier = %c, minus=%d zero=%d width=%d presicion=%d\n",
+			//	flgs.specifier, flgs.minus, flgs.zero,flgs.width, flgs.precision);
+			i += len_flags(str + i, flgs.specifier);
 		}
 		if (str[i])
 			i++;
@@ -153,6 +154,7 @@ int ft_printf(const char *str, ...)
 
 int main()
 {
-	printf("%d\n", ft_printf("%.s\n", "h"));
+	printf("%d\n", ft_printf("%-2.*s\n", -6,"hello"));
+	printf("%d\n", printf("%-2.*s\n", -6,"hello"));
 	//printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
 }
