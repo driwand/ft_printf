@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/05 16:15:27 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/06 19:32:15 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,30 @@ void	manage_flage(t_flags *flg, char c)
 		flg->zero = 0;
 }
 
-void	get_flags(const char *str, t_flags *flg)
+void	get_flags(const char *str, va_list *arg, t_flags *flg)
 {
 	int i;
 
 	i = 0;
-	inisilize_flags(flg);
-	while (!is_specifier(str[i]) && str[i])
+	while (!is_specifier(str[i]))
 	{
-		(str[i] == '-') ? flg->minus = 1 : 0;
-        (str[i] == '0') ? flg->zero = 1 : 0;
-        if (str[i] == '.')
-		{
-			if (str[i - 1] == '*')
-				flg->asterisk_width = 1;
-			if (str[i + 1] == '*')
-				flg->asterisk_precision = 1;
+		if (str[i] == '-')
+            flg->minus = 1;
+        else if (str[i] == '0')
+            flg->zero = 1;
+        else if (str[i] == '*' && (str[i - 1] == '%' || str[i - 1] == '-' ||
+                                   str[i - 1] == '0'))
+			flg->width = va_arg(*arg, int);
+		else if (str[i] == '*' && str[i + 1] == '.')
+			flg->width = va_arg(*arg, int);
+		else if (str[i] == '*' && str[i - 1] == '.')
+            flg->precision = va_arg(*arg, int);
+        else if (str[i] == '.' && str[i + 1] != '*')
 			flg->precision = ft_atoi(str + i + 1); // if the presicion is negetive then ..
-			i = (flg->precision == 0) ? i : i + skip_digits(&str[i + 1]);
-		}
-		if (flg->minus)
-        	(flg->width == 0) ? flg->width = ft_atoi(str + i + 1) : 0;
-		else
-			(flg->width == 0) ? flg->width = ft_atoi(str + i) : 0;
-		i++;
+        else if (flg->width == 0 && (str[i - 1] == '%' || str[i - 1] == '-' ||
+                                    str[i - 1] == '0'))
+            flg->width = ft_atoi(str + i);
+        i++;
 	}
 	manage_flage(flg, str[i]);
 }
