@@ -1,9 +1,10 @@
 
 SRC = utils.c \
 	  iterate_flags.c \
-	  print_string.c
+	  print_string.c \
+	  print_address.c
 
-CC = gcc -Wall -Wextra -Werror
+CC = gcc
 MAIN = ft_printf.c
 #@make -C libft && make -C libft clean
 

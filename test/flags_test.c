@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "utils.c"
 
 int ft_printf(const char*, ...);
 
@@ -20,7 +19,8 @@ int main()
     p = &k;
     char *adr = (char *)&r;
 
-    ft_printf("%02c\n", 'r');
-    printf("%*c\n",2, 'c');
+    printf("%p\n", &p);
+    // ft_printf("%02c\n", 'r');
+    // printf("%*c\n",2, 'c');
     return (0);
 }

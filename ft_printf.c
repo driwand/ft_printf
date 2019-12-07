@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/07 18:01:11 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/07 19:26:35 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	printf_result(const char *str, va_list *arg, t_flags flg)
 		return (print_string(str, arg, flg));
 	else if (flg.specifier == 'c' || flg.specifier == '%')
 		return (print_char(str, arg, flg));
+	if (flg.specifier == 'p')
+		return(print_address(str, arg, flg));
 	return (0);
 }
 
@@ -36,11 +38,6 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] != '%')
 			count += ft_putchar(str[i]);
-		// else if (str[i] == '%' && str[i + 1] == '%')
-        // {
-		//     count += ft_putchar('%');
-		//     i += 1;
-        // }
 		else
 		{
 			initialize_flags(&flgs);
@@ -56,17 +53,24 @@ int	ft_printf(const char *str, ...)
 
 int main()
 {
+	
 	/* NULL */
 	// printf("%d\n", ft_printf("%1.1s\n", NULL));
  	// printf("%d\n", printf("%1.1s\n", NULL));
 
 	/* %% */
-	// printf("%d\n", ft_printf("%%\n"));
-	// printf("%d\n", printf("%%\n"));
+	// unsigned char *str = "hello";
+	// printf("%d\n", ft_printf("%%%s\n", str));
+	// printf("%d\n", printf("%%%s\n", str));
 
+	/* address */
+	int *p;
+	printf("%d\n", ft_printf("%p\n", &p));
+	printf("%d\n", printf("%p\n", &p));
+	
 	/* ultimate string */
  	// printf("%d\n", ft_printf("%*.*s %s,%-3.*s '%2c-%.c'\n", 6, 2, "hello" , NULL, 1,"ld", 'r', 0));
  	// printf("%d\n", printf("%*.*s %s,%-3.*s '%2c-%.c'\n", 6, 2, "hello", NULL, 1,"ld", 'r', 0));
- 	printf("%d\n",ft_printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
-	printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
+ 	// printf("%d\n",ft_printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
+	// printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
 }

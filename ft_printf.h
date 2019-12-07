@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:08 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/07 14:14:21 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/07 19:11:01 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,6 @@ int				ft_putchar(char c);
 int				skip_digits(const char *str);
 int				print_string(const char *str, va_list *arg, t_flags flg);
 int				print_char(const char *str, va_list *arg, t_flags flg);
+int				print_address(const char *str, va_list *arg, t_flags flg);
+char			*to_hexa(int nb);
 #endif
