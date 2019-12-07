@@ -1,6 +1,7 @@
 
 SRC = utils.c \
-	  iterate_flags.c
+	  iterate_flags.c \
+	  print_string.c
 
 CC = gcc
 MAIN = ft_printf.c
