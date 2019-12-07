@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/07 22:10:51 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/07 22:15:15 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,32 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-int main()
-{
-	int *p;
-	char *str = "hello";
+// int main()
+// {
+// 	int *p;
+// 	char *str = "hello";
 	
-	// printf("%d\n", ft_printf("%*.*s\n", 6, 2, "hello"));
- 	// printf("%d\n", printf("%*.*s\n", 6, 2, "hello"));
+// 	// printf("%d\n", ft_printf("%.%%s\n", str));
+// 	// printf("%d\n", printf("%.%%s\n", str));
 
-	/* NULL */
-	// printf("%d\n", ft_printf("%1.1s\n", NULL));
- 	// printf("%d\n", printf("%1.1s\n", NULL));
+// 	// printf("%d\n", ft_printf("%*.*s\n", 6, 2, "hello"));
+//  	// printf("%d\n", printf("%*.*s\n", 6, 2, "hello"));
 
-	/* %% */
-	// printf("%d\n", ft_printf("%6s\n", str));
-	// printf("%d\n", printf("%6s\n", str));
+// 	/* NULL */
+// 	// printf("%d\n", ft_printf("%1.1s\n", NULL));
+//  	// printf("%d\n", printf("%1.1s\n", NULL));
 
-	/* address */
-	// printf("%d\n", ft_printf("%-19p\n", &p));
-	// printf("%d\n", printf("%-19p\n", &p));
+// 	/* %% */
+// 	// printf("%d\n", ft_printf("%6s\n", str));
+// 	// printf("%d\n", printf("%6s\n", str));
 
-	/* ultimate string */
- 	printf("%d\n", ft_printf("%*.*s %s,%-3.*s '%2c-%.c'|%.%%p|%s\n", 6, 2, "hello" , NULL, 1,"ld", 'r', 0, &p,"wow"));
- 	printf("%d\n", printf("%*.*s %s,%-3.*s '%2c-%.c'|%.%%p|%s\n", 6, 2, "hello", NULL, 1,"ld", 'r', 0, &p, "wow"));
- 	// printf("%d\n",ft_printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
-	// printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
-}
+// 	/* address */
+// 	// printf("%d\n", ft_printf("%.%%p\n", &p));
+// 	// printf("%d\n", printf("%.%%p\n", &p));
+
+// 	/* ultimate string */
+//  	// printf("%d\n", ft_printf("%*.*s %s,%-3.*s '%2c-%.c'|%.%%p|%s\n", 6, 2, "hello" , NULL, 1,"ld", 'r', 0, &p,"wow"));
+//  	// printf("%d\n", printf("%*.*s %s,%-3.*s '%2c-%.c'|%.%%p|%s\n", 6, 2, "hello", NULL, 1,"ld", 'r', 0, &p, "wow"));
+//  	// printf("%d\n",ft_printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
+// 	// printf("%d\n",printf("hqello amal's %%%s%%%s call her %%%%%%%s\n" ,"mom","amal","dad"));
+// }

@@ -103,7 +103,8 @@ int		print_char(const char *str, va_list *arg, t_flags flg)
 		{
 			count += apply_width(flg.width, 1);
 			if (flg.precision != -1)
-				count += ft_putchar(c);
+			    return (count + ft_putchar(c));
+//				count += ft_putchar(c);
 		}
 		else
 		{
