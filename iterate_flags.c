@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/07 17:52:37 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/07 21:00:11 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	manage_flag(t_flags *flg, char c)
 		flg->width *= -1;
 		flg->minus = 1;
 	}
-	if (flg->precision >= 0 && flg->specifier == 'c')
+	if ((flg->precision >= 0 && flg->specifier == 'c') || flg->specifier == 'p')
 		flg->precision = -1;
 }
 
