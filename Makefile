@@ -3,7 +3,7 @@ SRC = utils.c \
 	  iterate_flags.c \
 	  print_string.c
 
-CC = gcc
+CC = gcc -Wall -Wextra -Werror
 MAIN = ft_printf.c
 #@make -C libft && make -C libft clean
 

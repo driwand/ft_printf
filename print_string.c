@@ -71,11 +71,9 @@ int		print_rest(const char *str, char *tmp, int len, t_flags flg)
 int		print_string(const char *str, va_list *arg, t_flags flg)
 {
 	int		count;
-	int		i;
 	char	*tmp;
 	int		len;
 
-	i = 0;
 	count = 0;
 	tmp = va_arg(*arg, char*);
 	if (!tmp)
@@ -98,7 +96,7 @@ int		print_char(const char *str, va_list *arg, t_flags flg)
 
 	i = 0;
 	count = 0;
-	c = va_arg(*arg, int);
+	c = (flg.specifier == '%') ? '%' : va_arg(*arg, int);
 	if (str[i] != flg.specifier)
 	{
 		if (flg.minus == 0)
@@ -114,7 +112,7 @@ int		print_char(const char *str, va_list *arg, t_flags flg)
 		}
 		i++;
 	}
-	if ((str[i] == 'c' && i > 0 && !flg.minus) || i == 0)
+	if (((str[i] == 'c' || str[i] == '%') && i > 0 && !flg.minus) || i == 0)
 		count += ft_putchar(c);
 	return (count);
 }

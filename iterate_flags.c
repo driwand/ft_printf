@@ -6,25 +6,15 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/07 16:45:22 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/07 17:52:37 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		len_flags(const char *str, char c)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != c)
-		i++;
-	return (i);
-}
-
 int		is_specifier(char c)
 {
-	if (c == 'c' || c == 's')
+	if (c == 'c' || c == 's' || c == '%')
 		return (1);
 	if (c == 'p' || c == 'd' || c == 'i' || c == 'u'
 			|| c == 'x' || c == 'X')
@@ -64,7 +54,7 @@ void	get_flags(const char *str, va_list *arg, t_flags *flg)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	while (!is_specifier(str[i]))
 	{
 		if (str[i] == '-')
