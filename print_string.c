@@ -59,6 +59,7 @@ int		print_string(const char *str, va_list *arg, t_flags flg)
 	return (count);
 }
 
+
 int		print_char(const char *str, va_list *arg, t_flags flg)
 {
 	int		count;
@@ -84,7 +85,7 @@ int		print_char(const char *str, va_list *arg, t_flags flg)
 		}
 		i++;
 	}
-	if (((str[i] == 'c' || is_not_specifier(flg.specifier)) && i > 0 && !flg.minus) || i == 0)
+	if (((str[i] == 'c' || c == 0 || is_not_specifier(flg.specifier)) && i > 0 && !flg.minus) || i == 0)
 		count += ft_putchar(c);
 	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/08 19:29:20 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/08 20:52:23 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	ft_printf(const char *str, ...)
 	int		i;
 	int		len;
 
-	if (str)
-		len = ft_strlen(str);
+	len = ft_strlen(str);
 	i = 0;
 	count = 0;
 	va_start(arg, str);
@@ -58,8 +57,11 @@ int main()
 	int *p;
 	char *str = "hello";
 
-	printf("\n%d\n", ft_printf("%*5w", -12));
-	printf("\n%d\n", printf("%*5w", -12));
+	// ft_printf("%02c\n", NULL);
+	// printf("%02c", NULL);
+	
+	printf("\n%d\n", ft_printf("%*5", -12));
+	printf("\n%d\n", printf("%*5", -12));
 	
 	// printf("\n%d\n", ft_printf("%p", -12));
 	// printf("\n%d\n", printf("%p", -12));
@@ -86,7 +88,7 @@ int main()
 	// printf("%d\n", ft_printf("%.4p\n", &p));
 	// printf("%d\n", printf("%.4p\n", &p));
 
-	/* ultimate string */
+	// /* ultimate string */
  	// printf("%d\n", ft_printf("%*.*s %s,%-3.*s '%-2c-%.c'|%.%%p|%s<%0*%>\n", 6, 2, str , NULL, 1,"ld", 'r', 0, &p,"wow", 2));
  	// printf("%d\n", printf("%*.*s %s,%-3.*s '%-2c-%.c'|%.%%p|%s<%0*%>\n", 6, 2, str, NULL, 1,"ld", 'r', 0, &p, "wow", 2));
  	// printf("%d\n",ft_printf("hqello amal's %%%s%%%s call her %02%%-2%%%%s\n" ,"mom","amal","dad"));
