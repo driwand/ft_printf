@@ -6,13 +6,13 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 18:06:26 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/07 21:31:40 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/08 12:08:30 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_resrt(const char *str, char *tmp, int len, t_flags flg)
+static  int		print_resrt(const char *str, char *tmp, int len, t_flags flg)
 {
 	int i;
 	int count;
@@ -38,7 +38,7 @@ int		print_resrt(const char *str, char *tmp, int len, t_flags flg)
 	return (count);
 }
 
-int		print_result(const char *str, char *res, t_flags flg)
+static  int		print_result(const char *str, char *res, t_flags flg)
 {
 	int		count;
 	char	*tmp;
@@ -52,7 +52,7 @@ int		print_result(const char *str, char *res, t_flags flg)
 	return (count);
 }
 
-char *create_adr(char *str)
+static  char *create_adr(char *str)
 {
     char    *res;
     int     len;
