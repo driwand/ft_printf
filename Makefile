@@ -4,6 +4,7 @@ SRC = utils.c \
 	  iterate_flags.c \
 	  print_string.c \
 	  print_address.c \
+	  print_integer.c
 
 CC = gcc #-Wall -Wextra -Werror
 MAIN = ft_printf.c

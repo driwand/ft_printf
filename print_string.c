@@ -6,13 +6,13 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:56:01 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/08 13:57:06 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/09 13:23:45 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int		print_rest(const char *str, char *tmp, int len, t_flags flg)
+static	int	print_rest(const char *str, char *tmp, int len, t_flags flg)
 {
 	int i;
 	int count;
@@ -39,7 +39,7 @@ static	int		print_rest(const char *str, char *tmp, int len, t_flags flg)
 	return (count);
 }
 
-int		print_string(const char *str, va_list *arg, t_flags flg)
+int			print_string(const char *str, va_list *arg, t_flags flg)
 {
 	int		count;
 	char	*tmp;
@@ -59,8 +59,18 @@ int		print_string(const char *str, va_list *arg, t_flags flg)
 	return (count);
 }
 
+static	int	manage_char(char c, char ch, int i, t_flags flg)
+{
+	int count;
 
-int		print_char(const char *str, va_list *arg, t_flags flg)
+	count = 0;
+	if (((c == 'c' || ch == 0 || is_not_specifier(flg.specifier))
+		&& i > 0 && !flg.minus) || i == 0)
+		count += ft_putchar(ch);
+	return (count);
+}
+
+int			print_char(const char *str, va_list *arg, t_flags flg)
 {
 	int		count;
 	char	c;
@@ -76,7 +86,7 @@ int		print_char(const char *str, va_list *arg, t_flags flg)
 			count = (flg.zero) ? apply_zero(flg.width, 1)
 				: apply_width(flg.width, 1);
 			if (flg.precision != -1 || flg.zero)
-			    return (count + ft_putchar(c));
+				return (count + ft_putchar(c));
 		}
 		else
 		{
@@ -85,7 +95,5 @@ int		print_char(const char *str, va_list *arg, t_flags flg)
 		}
 		i++;
 	}
-	if (((str[i] == 'c' || c == 0 || is_not_specifier(flg.specifier)) && i > 0 && !flg.minus) || i == 0)
-		count += ft_putchar(c);
-	return (count);
+	return (count + manage_char(str[i], c, i, flg));
 }

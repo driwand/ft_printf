@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/08 19:44:48 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/09 13:20:06 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@ void	initialize_flags(t_flags *flg)
 	flg->skip_flags = 0;
 }
 
-void	manage_flag(t_flags *flg, char c)
+void	manage_flag(const char *str, t_flags *flg, char c, int i)
 {
+	if (is_not_specifier(str[i]))
+		flg->specifier = str[i];
+	flg->skip_flags = i;
 	if (flg->minus && flg->zero)
 		flg->zero = 0;
 	if (is_specifier(c))
@@ -72,28 +75,26 @@ void	get_flags(const char *str, va_list *arg, t_flags *flg)
 	int i;
 
 	i = 1;
-	while (!is_specifier(str[i]) && !is_not_specifier(str[i]))
+	while (!is_specifier(str[i]) && !is_not_specifier(str[i]) && str[i])
 	{
 		if (str[i] == '-')
 			flg->minus = 1;
 		else if (str[i] == '0')
 			flg->zero = 1;
-		else if (str[i] == '*' && (str[i - 1] == '%' || str[i - 1] == '-' ||
-					str[i - 1] == '0' || ft_isdigit(str[i - 1])))
-			flg->width = va_arg(*arg, int);
-		else if (str[i] == '*' && str[i + 1] == '.')
+		else if ((str[i] == '*' && (str[i - 1] == '%' || str[i - 1] == '-'
+				|| str[i - 1] == '0' || ft_isdigit(str[i - 1])))
+				|| (str[i] == '*' && str[i + 1] == '.'))
 			flg->width = va_arg(*arg, int);
 		else if (str[i] == '*' && str[i - 1] == '.')
 			flg->precision = va_arg(*arg, int);
 		else if (str[i] == '.' && str[i + 1] != '*')
 			flg->precision = ft_atoi(str + i + 1);
-		else if (flg->width == 0 && (str[i - 1] == '%' || str[i - 1] == '-' ||
-					str[i - 1] == '0'))
+		else if (((flg->width == 0) && (str[i - 1] == '%' || str[i - 1] == '-'
+				|| str[i - 1] == '0')) || (!flg->width && ft_isdigit(str[i])))
 			flg->width = ft_atoi(str + i);
+		if (flg->width < 0 && flg->minus == 0)
+			flg->minus = 1;
 		i++;
 	}
-	if (is_not_specifier(str[i]))
-		flg->specifier = str[i];
-	flg->skip_flags = i;
-	manage_flag(flg, str[i]);
+	manage_flag(str, flg, str[i], i);
 }
