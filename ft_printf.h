@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:08 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/09 14:22:32 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/09 20:56:08 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int				print_char(const char *str, va_list *arg, t_flags flg);
 int				print_address(va_list *arg, t_flags flg);
 int				print_nonflag(t_flags flg);
 int				print_integer(va_list *arg, t_flags flg);
+int				print_hexa(va_list *arg, t_flags flg);
 char			*to_hexa_uint(uintmax_t nb);
 char			*to_hexa(int nb);
 int				apply_width(int width, int len);

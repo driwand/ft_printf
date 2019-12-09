@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/09 20:46:34 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/09 21:04:22 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	printf_result(const char *str, va_list *arg, t_flags flg)
 	else if (flg.specifier == 'd' || flg.specifier == 'i'
 		|| flg.specifier == 'u')
 		return	(print_integer(arg, flg));
+	else if (flg.specifier == 'x' || flg.specifier == 'X')
+		return (print_hexa(arg, flg));
 	return (0);
 }
 
@@ -73,11 +75,17 @@ int main()
 	// printf("%d\n", ft_printf("%05.3d\n", 12));
 	// printf("%d\n", printf("%05.3d\n", 12));
 	
-     printf("%d\n", ft_printf("%4.2d\n", 1));
-     printf("%d\n", printf("%4.2d\n", 1));
+    // printf("%d\n", ft_printf("%4.2d\n", 1));
+    // printf("%d\n", printf("%4.2d\n", 1));
 
 	// printf("%d\n", ft_printf("%*.*d\n", 4, 4, 1));
 	// printf("%d\n", printf("%*.*d\n", 4, 4, 1));
+
+	/* ----------------------       hexa      ---------------------- */
+	
+	printf("%d\n", ft_printf("%04.*x\n",2, -15));
+	printf("%d\n", printf("%04.*x\n",2, -15));
+
 
 	/* ----------------------      huh??      ---------------------- */
 	// printf("\n%d\n", ft_printf("%5u*w", -12));
