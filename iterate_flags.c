@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/09 13:20:06 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/09 16:01:59 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		is_not_specifier(char c)
 	int		i;
 
 	i = 0;
-	tmp = "abdefghjklmnoqrtvwyz%";
+	tmp = "abefghjklmnoqrtvwyz%";
 	while (tmp[i])
 	{
 		if (tmp[i] == c)
@@ -57,7 +57,7 @@ void	manage_flag(const char *str, t_flags *flg, char c, int i)
 		flg->zero = 0;
 	if (is_specifier(c))
 		flg->specifier = c;
-	if (flg->specifier == 'd' || flg->specifier == 'i' || flg->specifier == 'u'
+	if (flg->specifier == 'i' || flg->specifier == 'u'
 			|| flg->specifier == 'x' || flg->specifier == 'x'
 			|| flg->specifier == 's')
 		flg->zero = 0;
@@ -70,31 +70,32 @@ void	manage_flag(const char *str, t_flags *flg, char c, int i)
 		flg->precision = -1;
 }
 
+int	g_i;
+
 void	get_flags(const char *str, va_list *arg, t_flags *flg)
 {
-	int i;
-
-	i = 1;
-	while (!is_specifier(str[i]) && !is_not_specifier(str[i]) && str[i])
+	g_i = 1;
+	while (!is_specifier(str[g_i]) && !is_not_specifier(str[g_i]) && str[g_i])
 	{
-		if (str[i] == '-')
+		if (str[g_i] == '-')
 			flg->minus = 1;
-		else if (str[i] == '0')
+		else if (str[g_i] == '0')
 			flg->zero = 1;
-		else if ((str[i] == '*' && (str[i - 1] == '%' || str[i - 1] == '-'
-				|| str[i - 1] == '0' || ft_isdigit(str[i - 1])))
-				|| (str[i] == '*' && str[i + 1] == '.'))
+		else if ((str[g_i] == '*' && (str[g_i - 1] == '%' || str[g_i - 1] == '-'
+				|| str[g_i - 1] == '0' || ft_isdigit(str[g_i - 1])))
+				|| (str[g_i] == '*' && str[g_i + 1] == '.'))
 			flg->width = va_arg(*arg, int);
-		else if (str[i] == '*' && str[i - 1] == '.')
+		else if (str[g_i] == '*' && str[g_i - 1] == '.')
 			flg->precision = va_arg(*arg, int);
-		else if (str[i] == '.' && str[i + 1] != '*')
-			flg->precision = ft_atoi(str + i + 1);
-		else if (((flg->width == 0) && (str[i - 1] == '%' || str[i - 1] == '-'
-				|| str[i - 1] == '0')) || (!flg->width && ft_isdigit(str[i])))
-			flg->width = ft_atoi(str + i);
+		else if (str[g_i] == '.' && str[g_i + 1] != '*')
+			flg->precision = ft_atoi(str + g_i + 1);
+		else if (((!flg->width) && (str[g_i - 1] == '%' || str[g_i - 1] == '-'
+				|| str[g_i - 1] == '0')) || (!flg->width && ft_isdigit(str[g_i]
+				&& str[g_i - 1] != '.')))
+			flg->width = ft_atoi(str + g_i);
 		if (flg->width < 0 && flg->minus == 0)
 			flg->minus = 1;
-		i++;
+		g_i++;
 	}
-	manage_flag(str, flg, str[i], i);
+	manage_flag(str, flg, str[g_i], g_i);
 }

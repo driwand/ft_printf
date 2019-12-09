@@ -21,8 +21,13 @@ int main()
     int *p;
     p = &k;
     char *adr = (char *)&r;
-    printf("\n%d\n", ft_printf("%5u*w", -12));
-    printf("\n%d\n", printf("%5u*w", -12));
+
+    printf("%d\n", printf("%3d\n", 12));
+
+    // printf("\n%d\n", ft_printf("%5u*w", -12));
+    // printf("\n%d\n", printf("%5u*w", -12));
+
+
     // ft_printf("%02c\n", 'r');
     // printf("%*c\n",2, 'c');
     return (0);
