@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/10 21:14:12 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/10 23:25:14 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,27 @@ int main()
 	
 	// printf("%d\n", ft_printf("%-*.*d\n", 4,3,1));
 	// printf("%d\n", printf("%-*.*d\n",4,3, 1));
+
+	// printf("\n%d\n", ft_printf("%04d", 5));
+	// printf("\n%d\n", printf("%04d", 5));
 	
+	// printf("\n%d\n", ft_printf("%05.3d", 12));
+	// printf("\n%d\n", printf("%05.3d", 12));
+	
+	// printf("\n%d\n", ft_printf("%5.d", 0));
+	// printf("\n%d\n", printf("%5.d", 0));
+	
+	// printf("\n%d\n", ft_printf("%05.3d", 12));
+	// printf("\n%d\n", printf("%05.3d", 12));
+
 	// printf("%d\n", ft_printf("%2.04d\n", 1));
 	// printf("%d\n", printf("%2.04d\n", 1));
 
-	// printf("%d\n", ft_printf("%02.04d\n", 1));
-	// printf("%d\n", printf("%02.04d\n", 1));
+	// printf("\n%d\n", ft_printf("%05.0d", -12));
+	// printf("\n%d\n", printf("%05.0d", -12));
 
-	// printf("\n%d\n", ft_printf("%05d", -12));
-	// printf("\n%d\n", printf("%05d", -12));
+	// printf("\n%d\n", ft_printf("%3.0d", 12));
+	// printf("\n%d\n", printf("%3.0d", 12));
 
 	// printf("\n%d\n", ft_printf("%05d", 12));
 	// printf("\n%d\n", printf("%05d", 12));
@@ -100,18 +112,18 @@ int main()
 	// printf("%d\n", ft_printf("%0-4d\n", 2));
 	// printf("%d\n", printf("%0-4d\n", 2));
 
-	// printf("%d\n", ft_printf("%s\n", str));
-	// printf("%d\n", printf("%s\n", str));
-
 	// printf("%d\n", ft_printf("%-.3d\n",-2));
 	// printf("%d\n", printf("%-.3d\n",-2));
 
 	// printf("%d\n", ft_printf("%05.3d\n", 12));
 	// printf("%d\n", printf("%05.3d\n", 12));
 	
+    // printf("%d\n", ft_printf("%4.2d\n", 0));
+    // printf("%d\n", printf("%4.2d\n", 0));
+
     // printf("%d\n", ft_printf("%4.2d\n", 1));
     // printf("%d\n", printf("%4.2d\n", 1));
-
+	
 	// printf("%d\n", ft_printf("%*.*d\n", 4, 4, 1));
 	// printf("%d\n", printf("%*.*d\n", 4, 4, 1));
 

@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 14:08:27 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/10 21:10:42 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/10 23:16:37 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int print_integer(va_list *arg, t_flags flg)
     int sign;
 
     count = 0;
+    sign = 1;
     nbr = va_arg(*arg, int);
     len = get_int_len(nbr);
     if (nbr < 0)
@@ -81,14 +82,33 @@ int print_integer(va_list *arg, t_flags flg)
     p = (flg.precision != -1 && flg.precision > len) ? flg.precision : len;
     if (sign < 0)
         flg.width--;
-    if (flg.width > 0 && !flg.minus && (!flg.zero || (sign < 0 && flg.precision != -1)))
-        count += apply_width_int(flg.width - p);
+    if (!nbr && !flg.precision)
+    {
+        flg.width++;
+        count--;
+    }
+    // if ((flg.width > 0 && !flg.minus && ((flg.zero || (sign < 0 && flg.precision != -1) || (!flg.zero)))))
+    //     count += apply_width_int(flg.width - p);
+    // if (((flg.width > p && len > flg.width) || ((!flg.precision || flg.width < p || (flg.precision && nbr)))) && !flg.minus)
+    //     count += apply_width_int(flg.width - p);
+    // if (!flg.minus && ((flg.width > len && !flg.zero) || ((p != len && flg.width > count) || (!nbr))))
+    //     count += apply_width_int(flg.width - p);
+    if (!flg.minus && flg.width)
+    {
+        if (!flg.zero)
+            count += apply_width_int(flg.width - p);
+        else if (flg.precision > 0)
+            count += apply_width_int(flg.width - p);
+        else if (flg.precision == 0)
+            count += apply_width_int(flg.width - p);
+    }
     if (sign < 0)
         count += ft_putchar('-');
     if (!flg.minus && flg.zero && flg.precision == -1)
         count += apply_zero_int(flg.width - len);
     apply_zero_int(p - len);
-    ft_putnbr_fd(nbr, 1);
+    if ((flg.precision != 0 || nbr))
+        ft_putnbr_fd(nbr, 1);
     if (flg.minus)
         count += apply_width_int(flg.width - p);
     return (count + p);

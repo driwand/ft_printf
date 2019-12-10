@@ -79,7 +79,7 @@ void	get_flags(const char *str, va_list *arg, t_flags *flg)
 	{
 		if (str[g_i] == '-')
 			flg->minus = 1;
-		else if (str[g_i] == '0')
+		else if (str[g_i] == '0' && str[g_i - 1] == '%')
 			flg->zero = 1;
 		else if ((str[g_i] == '*' && (str[g_i - 1] == '%' || str[g_i - 1] == '-'
 						|| str[g_i - 1] == '0' || ft_isdigit(str[g_i - 1])))
