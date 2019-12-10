@@ -4,3 +4,8 @@ CMakeLists.txt
 .get_next_line.c.swo
 .vscode
 a.out.dSYM
+.DS_Store
+.gitignore
+tt.txt
+und.txt
+*.o
