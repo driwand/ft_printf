@@ -22,8 +22,8 @@ int main()
     p = &k;
     char *adr = (char *)&r;
 
-    printf("%d\n", ft_printf("%3d\n", 12));
-    printf("%d\n", printf("%3d\n", 12));
+    printf("%d\n", ft_printf("%3w\n"));
+    printf("%d\n", printf("%3w\n"));
 
     // printf("\n%d\n", ft_printf("%5u*w", -12));
     // printf("\n%d\n", printf("%5u*w", -12));

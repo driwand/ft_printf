@@ -6,11 +6,13 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:56:01 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/09 13:23:45 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/10 16:35:40 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int g_allocated;
 
 static	int	print_rest(const char *str, char *tmp, int len, t_flags flg)
 {
@@ -45,15 +47,13 @@ int			print_string(const char *str, va_list *arg, t_flags flg)
 	char	*tmp;
 	int		len;
 
+	g_allocated = 1;
 	count = 0;
 	tmp = va_arg(*arg, char*);
 	if (!tmp)
 		tmp = "(null)";
 	if (flg.precision >= 0)
-	{
 		tmp = apply_precision(tmp, flg.precision);
-		free(tmp);
-	}
 	len = ft_strlen(tmp);
 	count += print_rest(str, tmp, len, flg);
 	return (count);
