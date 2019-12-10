@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 14:08:27 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/09 21:04:34 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/10 12:39:46 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,23 @@ int print_integer(va_list *arg, t_flags flg)
     count = 0;
     nbr = va_arg(*arg, int);
     len = get_int_len(nbr);
-    p = (flg.precision != -1) ? flg.precision : len;
-    if (!flg.minus && sign != -1 && (!flg.zero || flg.width))
+    if (nbr < 0)
     {
-        if (nbr < 0)
-            count += apply_width_int(flg.width - p - 1);
-        else
-            count += apply_width_int(flg.width - p);
+        sign = -1;
+        nbr *= -1;
+        len--;
     }
+    p = (flg.precision != -1 && flg.precision > len) ? flg.precision : len;
+    if (sign < 0)
+        flg.width--;
+    if (flg.zero && flg.precision == -1)
+        sign = 2;
+    if (!flg.minus && (!flg.zero || flg.width) && sign != 2)
+        count += apply_width_int(flg.width - p);
+    if (sign < 0)
+        count += ft_putchar('-');
     if (!flg.minus && flg.zero && flg.precision == -1)
-    {
         count += apply_zero_int(flg.width - len);
-    }
     apply_zero_int(p - len);
     ft_putnbr_fd(nbr, 1);
     if (flg.minus)
@@ -102,7 +107,6 @@ int print_hexa(va_list *arg, t_flags flg)
     res = to_hexa_uint(nbr);
     if (flg.precision < 0)
         count += apply_zero_int(flg.width - ft_strlen(res));
-    
     count += ft_putstr(res);
     return (count);
 }
