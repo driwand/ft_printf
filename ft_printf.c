@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/09 21:04:22 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/10 13:40:56 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,24 @@ int main()
 	char *str = "hello";
 
 	/* ----------------------     integer     ---------------------- */
+	
 	// printf("%d\n", ft_printf("%-*.*d\n", 4,3,1));
 	// printf("%d\n", printf("%-*.*d\n",4,3, 1));
 	
 	// printf("%d\n", ft_printf("%4.*d\n",-1, 1));
 	// printf("%d\n", printf("%4.*d\n",-1, 1));
+	
+	// printf("%d\n", ft_printf("%4d\n", 2));
+	// printf("%d\n", printf("%4d\n", 2));
 
-	// printf("%d\n", ft_printf("%5.3d\n", 12));
-	// printf("%d\n", printf("%5.3d\n", 12));
+	// printf("%d\n", ft_printf("%0-4d\n", 2));
+	// printf("%d\n", printf("%0-4d\n", 2));
+
+	printf("%d\n", ft_printf("%d\n", 882));
+	printf("%d\n", printf("% d\n", 882));
+
+	// printf("%d\n", ft_printf("%-.3d\n",-2));
+	// printf("%d\n", printf("%-.3d\n",-2));
 
 	// printf("%d\n", ft_printf("%05.3d\n", 12));
 	// printf("%d\n", printf("%05.3d\n", 12));
@@ -83,11 +93,12 @@ int main()
 
 	/* ----------------------       hexa      ---------------------- */
 	
-	printf("%d\n", ft_printf("%04.*x\n",2, -15));
-	printf("%d\n", printf("%04.*x\n",2, -15));
+	// printf("%d\n", ft_printf("%04.*x\n",2, -15));
+	// printf("%d\n", printf("%05.*x\n",2, -15));
 
 
 	/* ----------------------      huh??      ---------------------- */
+	
 	// printf("\n%d\n", ft_printf("%5u*w", -12));
 	// printf("\n%d\n", printf("%5u*w", -12));
 
@@ -95,6 +106,7 @@ int main()
 	// printf("\n%d\n", printf("%*w", 12));
 	
 	/* ----------------------     normal 	  ---------------------- */
+	
 	// printf("%d\n", ft_printf("%*.*s\n", 6, -2, "hello"));
  	// printf("%d\n", printf("%*.*s\n", 6, -2, "hello"));
 
@@ -105,6 +117,7 @@ int main()
 	// printf("%*s\n", 0, "h");
 	
 	/* ----------------------      NULL       ---------------------- */
+	
 	// printf("%d\n", ft_printf("%1.1s\n", NULL));
  	// printf("%d\n", printf("%1.1s\n", NULL));
 
@@ -112,10 +125,12 @@ int main()
 	// printf("\n%d\n", printf("%*.*s", -15, 0, NULL));
 	
 	/* ----------------------       %% 	     ---------------------- */
+	
 	// printf("%d\n", ft_printf("%-5%%02%\n"));
 	// printf("%d\n", printf("%-5%%02%\n"));
 
 	/* ----------------------    address     ---------------------- */
+	
 	// printf("%d\n", ft_printf("%*p\n", -16, &p));
 	// printf("%d\n", printf("%*p\n", -16, &p));
 
@@ -123,6 +138,7 @@ int main()
 	// printf("\n%d\n", printf("%p", -12));
 
 	/* ---------------------- ultimate string ---------------------- */
+	
  	// printf("%d\n", ft_printf("%*.*s %s,%-3.*s '%-2c-%.c'|%.%%p|%s<%0*%>\n", 6, 2, str , NULL, 1,"ld", 'r', 0, &p,"wow", 2));
  	// printf("%d\n", printf("%*.*s %s,%-3.*s '%-2c-%.c'|%.%%p|%s<%0*%>\n", 6, 2, str, NULL, 1,"ld", 'r', 0, &p, "wow", 2));
 	 
