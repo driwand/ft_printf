@@ -6,169 +6,97 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 14:08:27 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/10 23:36:29 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:37:39 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int     get_int_len(int n)
+static	int		manage_int(int *nbr, int *len, int *p, t_flags *flg)
 {
-    int len;
-    unsigned int nb;
+	int count;
+	int sign;
 
-    len = 0;
-    if (n < 0)
-    {
-        len++;
-        nb = -n;
-    }
-    else
-        nb = n;
-    while (nb > 9)
-    {
-        nb /= 10;
-        len++;
-    }
-    if (nb < 9)
-        len++;
-    return (len);
+	sign = 1;
+	count = 0;
+	*len = get_int_digits(*nbr);
+	if (*nbr < 0)
+	{
+		*nbr *= -1;
+		*len -= 1;
+		sign = -1;
+	}
+	(*p) = (flg->precision != -1 && flg->precision > *len)
+		? flg->precision : *len;
+	if (sign < 0)
+		flg->width--;
+	if (!*nbr && !flg->precision)
+	{
+		flg->width++;
+		count--;
+	}
+	return (count);
 }
 
-int apply_width_int(int width)
+static	void	width_int(t_flags flg, int p, int *count)
 {
-    int count;
-
-    count = 0;
-    while (count < width)
-    {
-        ft_putchar_fd(' ', 1);
-        count++;
-    }
-    return (count);
+	if (!flg.minus && flg.width)
+	{
+		if (!flg.zero)
+			*count += apply_width_int(flg.width - p);
+		else if (flg.precision > 0)
+			*count += apply_width_int(flg.width - p);
+		else if (flg.precision == 0)
+			*count += apply_width_int(flg.width - p);
+	}
 }
 
-int apply_zero_int(int width)
+static	void	manage_values(t_flags *flg, int nbr, int *sign)
 {
-    int count;
-
-    count = 0;
-    while (count < width)
-    {
-        ft_putchar_fd('0', 1);
-        count++;
-    }
-    return (count);
+	flg->precision = (nbr < 0 && flg->precision < 0)
+		? flg->precision - 1 : flg->precision;
+	if (nbr < 0 && flg->precision < 0)
+		flg->precision = flg->width - 1;
+	*sign = (nbr < 0) ? -1 : 1;
 }
 
-int print_integer(va_list *arg, t_flags flg)
+static	int		print_res_int(t_flags flg, int p, int len, int nbr)
 {
-    int count;
-    int nbr;
-    int len;
-    int p;
-    int sign;
+	int count;
 
-    count = 0;
-    sign = 1;
-    nbr = va_arg(*arg, int);
-    len = get_int_len(nbr);
-    if (nbr < 0)
-    {
-        nbr *= -1;
-        len--;
-        sign = -1;
-    }
-    p = (flg.precision != -1 && flg.precision > len) ? flg.precision : len;
-    if (sign < 0)
-        flg.width--;
-    if (!nbr && !flg.precision)
-    {
-        flg.width++;
-        count--;
-    }
-    if (!flg.minus && flg.width)
-    {
-        if (!flg.zero)
-            count += apply_width_int(flg.width - p);
-        else if (flg.precision > 0)
-            count += apply_width_int(flg.width - p);
-        else if (flg.precision == 0)
-            count += apply_width_int(flg.width - p);
-    }
-    if (sign < 0 && nbr != INT32_MIN)
-        count += ft_putchar('-');
-    if (!flg.minus && flg.zero && flg.precision == -1)
-        count += apply_zero_int(flg.width - len);
-    apply_zero_int(p - len);
-    if ((flg.precision != 0 || nbr))
-        ft_putnbr_fd(nbr, 1);
-    if (flg.minus)
-        count += apply_width_int(flg.width - p);
-    if (nbr == INT32_MIN)
-        count++;
-    return (count + p);
+	count = 0;
+	apply_zero_int(p - len);
+	if ((flg.precision != 0 || nbr))
+		ft_putnbr_fd(nbr, 1);
+	if (flg.minus)
+		count += apply_width_int(flg.width - p);
+	return (count);
 }
 
-
-int print_u(va_list *arg, t_flags flg)
+int				print_integer(va_list *arg, t_flags flg)
 {
-    int count;
-    unsigned nbr;
-    int len;
-    int p;
-    int sign;
+	int count;
+	int nbr;
+	int len;
+	int p;
+	int sign;
 
-    count = 0;
-    sign = 1;
-    nbr = va_arg(*arg, int);
-    len = get_int_len(nbr);
-    // if (nbr < 0)
-    // {
-    //     nbr *= -1;
-    //     len--;
-    //     sign = -1;
-    // }
-    p = (flg.precision != -1 && flg.precision > len) ? flg.precision : len;
-    if (!nbr && !flg.precision)
-    {
-        flg.width++;
-        count--;
-    }
-    if (!flg.minus && flg.width)
-    {
-        if (!flg.zero)
-            count += apply_width_int(flg.width - p);
-        else if (flg.precision > 0)
-            count += apply_width_int(flg.width - p);
-        else if (flg.precision == 0)
-            count += apply_width_int(flg.width - p);
-    }
-    if (sign < 0 && nbr != INT32_MIN)
-        count += ft_putchar('-');
-    if (!flg.minus && flg.zero && flg.precision == -1)
-        count += apply_zero_int(flg.width - len);
-    apply_zero_int(p - len);
-    if ((flg.precision != 0 || nbr))
-        ft_putnbr_fd(nbr, 1);
-    if (flg.minus)
-        count += apply_width_int(flg.width - p);
-    if (nbr == INT32_MIN)
-        count++;
-    return (count + p);
-}
-
-int print_hexa(va_list *arg, t_flags flg)
-{
-    int count;
-    int nbr;
-    char *res;
-    
-    count = 0;
-    nbr = va_arg(*arg, int);
-    res = to_hexa_uint(nbr);
-    if (flg.precision < 0)
-        count += apply_zero_int(flg.width - ft_strlen(res));
-    count += ft_putstr(res);
-    return (count);
+	count = 0;
+	nbr = va_arg(*arg, int);
+	manage_values(&flg, nbr, &sign);
+	count += manage_int(&nbr, &len, &p, &flg);
+	if (nbr < 0)
+	{
+		flg.width++;
+		flg.precision++;
+	}
+	width_int(flg, p, &count);
+	if (sign < 0 && nbr != INT32_MIN)
+		count += ft_putchar('-');
+	if (!flg.minus && flg.zero && flg.precision == -1)
+		count += apply_zero_int(flg.width - len);
+	count += print_res_int(flg, p, len, nbr);
+	if (nbr == INT32_MIN)
+		count++;
+	return (count + p);
 }

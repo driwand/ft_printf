@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:08 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/10 23:36:58 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/11 13:58:00 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ int				print_address(va_list *arg, t_flags flg);
 int				print_nonflag(t_flags flg);
 int				print_integer(va_list *arg, t_flags flg);
 int				print_hexa(va_list *arg, t_flags flg);
-int				print_u(va_list *arg, t_flags flg);
+int				print_unsigned(va_list *arg, t_flags flg);
 char			*to_hexa_uint(uintmax_t nb);
 char			*to_hexa(int nb);
 int				apply_width(int width, int len);
 char			*apply_precision(char *str, int pres);
 int				apply_zero(int width, int len);
+int				apply_zero_int(int width);
+int				apply_width_int(int width);
+int				get_int_digits(int n);
+int				get_u_digits(unsigned int n);
+void			ft_putnbr_u(unsigned int n);
 #endif
