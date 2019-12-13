@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/11 17:11:28 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 14:55:00 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ void	manage_flag(const char *str, t_flags *flg, char c, int i)
 		flg->zero = 0;
 	if (is_specifier(c))
 		flg->specifier = c;
-	if (flg->specifier == 'i' || flg->specifier == 'u'
-			|| flg->specifier == 'x' || flg->specifier == 'x'
-			|| flg->specifier == 's')
+	if (flg->specifier == 's')
 		flg->zero = 0;
 	if (flg->width < 0)
 	{
@@ -68,8 +66,8 @@ void	manage_flag(const char *str, t_flags *flg, char c, int i)
 	}
 	if ((flg->precision >= 0 && flg->specifier == 'c') || flg->specifier == 'p')
 		flg->precision = -1;
-	// if (flg->precision < 0 && flg->specifier == 'd')
-	// 	flg->precision = flg->width;
+	if ((flg->precision == -1 && flg->zero && flg->width) && (flg->specifier == 'x' || flg->specifier == 'x'))
+		flg->precision = flg->width;
 }
 
 int	g_i;

@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 14:08:27 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/11 17:37:39 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 14:56:54 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ static	void	width_int(t_flags flg, int p, int *count)
 
 static	void	manage_values(t_flags *flg, int nbr, int *sign)
 {
-	flg->precision = (nbr < 0 && flg->precision < 0)
-		? flg->precision - 1 : flg->precision;
-	if (nbr < 0 && flg->precision < 0)
+	flg->precision = (nbr < 0 && flg->precision < 0 && flg->precision != -1) ? flg->precision - 1 : flg->precision;
+	if (nbr < 0 && flg->precision < 0 && flg->precision != -1)
 		flg->precision = flg->width - 1;
 	*sign = (nbr < 0) ? -1 : 1;
 }
@@ -88,7 +87,8 @@ int				print_integer(va_list *arg, t_flags flg)
 	if (nbr < 0)
 	{
 		flg.width++;
-		flg.precision++;
+		if (flg.precision != -1)
+			flg.precision++;
 	}
 	width_int(flg, p, &count);
 	if (sign < 0 && nbr != INT32_MIN)

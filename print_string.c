@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:56:01 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/11 15:58:18 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 14:58:30 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int			print_string(const char *str, va_list *arg, t_flags flg)
 		tmp = apply_precision(tmp, flg.precision);
 	len = ft_strlen(tmp);
 	count += print_rest(str, tmp, len, flg);
+	if (flg.precision >= 0)
+		free(tmp);
 	return (count);
 }
 
