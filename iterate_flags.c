@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:54:05 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 14:55:00 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:41:07 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	manage_flag(const char *str, t_flags *flg, char c, int i)
 	}
 	if ((flg->precision >= 0 && flg->specifier == 'c') || flg->specifier == 'p')
 		flg->precision = -1;
-	if ((flg->precision == -1 && flg->zero && flg->width) && (flg->specifier == 'x' || flg->specifier == 'x'))
+	if ((flg->precision == -1 && flg->zero && flg->width) &&
+			(flg->specifier == 'x' || flg->specifier == 'x'))
 		flg->precision = flg->width;
 }
 
@@ -82,7 +83,7 @@ void	get_flags(const char *str, va_list *arg, t_flags *flg)
 		else if (str[g_i] == '0' && str[g_i - 1] == '%')
 			flg->zero = 1;
 		else if ((str[g_i] == '*' && (str[g_i - 1] == '%' || str[g_i - 1] == '-'
-						|| str[g_i - 1] == '0' || ft_isdigit(str[g_i - 1])))
+				|| str[g_i - 1] == '0' || ft_isdigit(str[g_i - 1])))
 				|| (str[g_i] == '*' && str[g_i + 1] == '.'))
 			flg->width = va_arg(*arg, int);
 		else if (str[g_i] == '*' && str[g_i - 1] == '.')
@@ -90,8 +91,8 @@ void	get_flags(const char *str, va_list *arg, t_flags *flg)
 		else if (str[g_i] == '.' && str[g_i + 1] != '*')
 			flg->precision = ft_atoi(str + g_i + 1);
 		else if (((!flg->width) && (str[g_i - 1] == '%' || str[g_i - 1] == '-'
-		|| str[g_i - 1] == '0')) || (!flg->width && ft_isdigit(str[g_i])
-		&& str[g_i - 1] != '.') || (str[g_i - 1] == '*' && ft_isdigit(str[g_i])))
+	|| str[g_i - 1] == '0')) || (!flg->width && ft_isdigit(str[g_i])
+	&& str[g_i - 1] != '.') || (str[g_i - 1] == '*' && ft_isdigit(str[g_i])))
 			flg->width = ft_atoi(str + g_i);
 		if (flg->width < 0 && flg->minus == 0)
 			flg->minus = 1;
