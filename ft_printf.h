@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:08 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 14:31:02 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:22:51 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			initialize_flags(t_flags *flg);
 void			get_flags(const char *str, va_list *arg, t_flags *flg);
 int				ft_putstr(char *str);
 int				ft_putchar(char c);
-int             is_not_specifier(char c);
+int				is_not_specifier(char c);
 int				skip_digits(const char *str);
 int				print_string(const char *str, va_list *arg, t_flags flg);
 int				print_char(const char *str, va_list *arg, t_flags flg);

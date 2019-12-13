@@ -6,12 +6,11 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 14:30:51 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:21:56 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	printf_result(const char *str, va_list *arg, t_flags flg)
 {
@@ -20,9 +19,9 @@ int	printf_result(const char *str, va_list *arg, t_flags flg)
 	else if (flg.specifier == 'c' || is_not_specifier(flg.specifier))
 		return (print_char(str, arg, flg));
 	else if (flg.specifier == 'p')
-		return	(print_address(arg, flg));
+		return (print_address(arg, flg));
 	else if (flg.specifier == 'd' || flg.specifier == 'i')
-		return	(print_integer(arg, flg));
+		return (print_integer(arg, flg));
 	else if (flg.specifier == 'x' || flg.specifier == 'X')
 		return (print_hexa(arg, flg));
 	else if (flg.specifier == 'u')

@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 12:42:37 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 16:05:36 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:09:14 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int		ft_putstr(char *str)
 	}
 	return (i);
 }
-
-#include <stdio.h>
 
 char	*to_hexa_uint(uintmax_t nb)
 {
