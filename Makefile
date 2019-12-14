@@ -1,8 +1,11 @@
+
 NAME = libftprintf.a
+NAMELIBFT = libft.a
 LIBFT = libft
 MAKE = make -C
 FLAGS = -Wall -Wextra -Werror
 CC = gcc
+AR= ar rcs
 
 SRC = ft_printf.c \
 		utils.c \
@@ -61,7 +64,7 @@ OBJ_LIBFT = $(addprefix $(LIBFT)/,$(SRC_LIBFT:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_LIBFT)
-	ar rcs $(NAME) $(OBJ) $(OBJ_LIBFT)
+	$(AR) $(NAME) $(OBJ) $(OBJ_LIBFT)
 
 %.o:%.c
 	$(CC) $(FLAGS) -c $< -o $@
@@ -72,5 +75,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f libft/$(NAMELIBFT)
 
 re: fclean all

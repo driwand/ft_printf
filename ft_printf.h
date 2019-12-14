@@ -6,17 +6,17 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 17:16:08 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 17:22:51 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/14 13:45:40 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "libft/libft.h"
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
 
 typedef	struct	s_flags
 {

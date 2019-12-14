@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 17:37:42 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 17:19:21 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/14 13:50:14 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,15 @@ static	void	manage_width(t_flags flg, int *count, int p)
 
 int				print_hexa(va_list *arg, t_flags flg)
 {
-	int		count;
-	char	*res;
-	int		len;
-	int		p;
+	int					count;
+	char				*res;
+	int					len;
+	int					p;
+	unsigned int		nbr;
 
+	nbr = va_arg(*arg, unsigned int);
 	count = 0;
-	res = to_hexa_uint(va_arg(*arg, unsigned int));
+	res = (!nbr && !flg.precision) ? ft_strdup("") : to_hexa_uint(nbr);
 	if (flg.specifier == 'X')
 		to_upper_x(res);
 	len = ft_strlen(res);

@@ -6,7 +6,7 @@
 /*   By: abkssiba <abkssiba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 16:04:28 by abkssiba          #+#    #+#             */
-/*   Updated: 2019/12/13 17:21:56 by abkssiba         ###   ########.fr       */
+/*   Updated: 2019/12/14 12:24:10 by abkssiba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int	ft_printf(const char *str, ...)
 		}
 		i++;
 	}
+	va_end(arg);
 	return (count);
 }
